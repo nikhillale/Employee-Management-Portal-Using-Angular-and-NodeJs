@@ -1,0 +1,28 @@
+<div class="container login-container">
+  <div class="row">
+<div class="col-md-6 login-form-2">
+  <div class="login-logo">
+      <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+  </div>
+  <h3>Reset Password</h3>
+
+  <form [formGroup]="resetForm">
+
+      <label  style="color:white">Enter New Password</label>
+      <div class="form-group">
+          <input formControlName="password" type="text" class="form-control" placeholder="Your Password *" value="" />
+      </div>
+      <label style="color:white">Conform Password</label>
+      <div class="form-group">
+          <input formControlName="conform" type="text" class="form-control" placeholder="Your Password *" value="" />
+      </div>
+      <div class="form-group">
+          <input *ngIf="enable" (click)="onSubmit()" type="submit" class="btnSubmit" value="Submit" />
+      </div>
+    </form>
+</div>
+</div>
+</div>
+
+
+

@@ -1,0 +1,51 @@
+
+<br>
+
+  <div class="bs-example">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="color:  #3b3333">
+          <button routerLink='../display'  type="button" class="btn btn-outline-success" style="margin-right: 10px ; color:whitesmoke" >List</button>
+          <button routerLink='../create'  type="button" class="btn btn-outline-primary " style="color:whitesmoke">Add</button>
+
+      </nav>
+  </div>
+
+<div>
+<table>
+  <tr class="head">
+    <th>ID</th>
+    <th>ProfilePic</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Email</th>
+    <th>Gender</th>
+    <th>Age</th>
+    <th>DOB</th>
+    <th>ContactNumber</th>
+    <th>State</th>
+    <th>City</th>
+    <th>PinCode</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
+  <tr *ngFor='let employee of displayList; index as i'>
+    <td >{{(i+1)}}</td>
+    <td><img src="http://localhost:3000/{{employee.profileimage}}" width="70px" height="35px"></td>
+    <td >{{employee.firstName}}</td>
+    <td >{{employee.lastName}}</td>
+    <td >{{employee.email}}</td>
+    <td >{{employee.gender}}</td>
+    <td >{{employee.age}}</td>
+    <td >{{employee.Dob | date}}</td>
+    <td >{{employee.contactNumber}}</td>
+    <td >{{employee.states}}</td>
+    <td >{{employee.cityes}}</td>
+    <td >{{employee.pinCode}}</td>
+    <td ><button (click)="editEmployee(employee._id) ">Edit</button></td>
+    <td ><button (click)="deleteEmployee(employee._id)">Delete</button></td>
+  </tr>
+</table>
+</div>
+<router-outlet></router-outlet>
+
+
+

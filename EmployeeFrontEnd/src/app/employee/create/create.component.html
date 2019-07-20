@@ -1,0 +1,175 @@
+<br>
+  <div>
+    <div class="bs-example">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="color:  #3b3333">
+            <button routerLink='../display'type="button" class="btn btn-outline-success" style="margin-right: 10px ; color:whitesmoke" >List</button>
+            <button routerLink='../create' type="button" class="btn btn-outline-primary " style="color:whitesmoke">Add</button>
+            <ngx-avatar [src]="imgurl"></ngx-avatar>
+            <!-- <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+        </nav>
+    </div>
+  </div>
+<div class=" text-white">
+<form [formGroup]="employee" (ngSubmit)="OnSubmit()">
+<div class="sub-entry">
+        <div class = "shape">
+          <h3 style="font-family:Georgia, 'Times New Roman', Times, serif">Personal Details</h3>
+          <hr size="30" color="white">
+          <div class="form-group">
+            <label >First Name</label>
+            <input formControlName="firstName" class="form-control" type="text"  >
+            <div *ngIf="firstName.invalid && firstName.touched">
+                <i class="far fa-check-circle" style="font-size:18px;color:red;">First Name is Required & Minimum 3 character accepted </i>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <label >Last Name</label>
+              <input formControlName="lastName" class="form-control" type="text" name="" placeholder="Enter Your Last Name">
+              <div *ngIf="lastName.invalid && lastName.touched">
+                  <i class="far fa-check-circle" style="font-size:18px;color:red;">Last Name is Required & Minimum 3 character accepted </i>
+              </div>
+            </div>
+
+          <div class="form-group">
+              <label >Email</label>
+              <input [class.is-invalid]="email.invalid && email.touched" formControlName="email" class="form-control" type="email" name="" placeholder="Enter Your Email">
+              <div *ngIf="email.invalid && email.touched">
+                  <i class="far fa-check-circle" style="font-size:18px;color:red;"> Enter correct email</i>
+              </div>
+          </div>
+
+          <div>
+            <label>Gender</label>
+            <br>
+            <label>
+              <input type="radio" value="Male" formControlName="gender" Selected>
+                <span>Male</span>
+            </label>
+            <label>
+              <input type="radio" value="Female" formControlName="gender">
+                <span>Female</span>
+            </label>
+          </div>
+
+          <div class="form-group">
+              <label >Age</label>
+              <input   formControlName="age" class="form-control" type="number" name="" placeholder="Enter Your Age">
+              <div *ngIf="age.invalid && age.touched">
+                  <i class="far fa-check-circle" style="font-size:18px;color:red;"> Enter correct Age</i>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label >Salary</label>
+              <input  formControlName="salary" class="form-control" type="text" name="" currencyMask [options]="{ prefix: '&#8377; ', thousands: '.', decimal: ',' }"   >
+              <div *ngIf="salary.invalid && salary.touched">
+                  <i class="far fa-check-circle" style="font-size:18px;color:red;">Salary is required</i>
+              </div>
+          </div>
+
+          <div class="form-group">
+            <label >Date Of Birth</label>
+            <input class="form-control" type="text" formControlName="Dob" bsDatepicker
+            [bsConfig]="{ adaptivePosition: true }" placeholder="select Date of Birth">
+          </div>
+          <div *ngIf="dob.invalid && dob.touched">
+              <i class="far fa-check-circle" style="font-size:18px;color:red;">Date of birth is required</i>
+          </div>
+          <div class="custom-file">
+            <input  class="custom-file-input" type="file" (change)="onFileUpload($event)">
+            <label  class="custom-file-label">Upload Profile Picture</label>
+          </div>
+        </div>
+</div>
+<div class="sub-entry">
+
+    <div class ="main-content">
+      <div class="shape">
+        <h3 style="font-family:Georgia, 'Times New Roman', Times, serif">Contact Details</h3>
+        <hr size="30" color="white">
+        <div class="form-group">
+          <label >Address</label>
+          <input  class="form-control" type="text" formControlName="address" placeholder="Enter Your Address">
+          <div *ngIf="address.invalid && address.touched">
+              <i class="far fa-check-circle" style="font-size:18px;color:red;">Address is Required  </i>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label >Contact Number </label>
+          <input class="form-control" type="text" formControlName="contactNumber" placeholder="Enter Your Contact Number" mask="0000000000">
+          <div >
+              <i class="far fa-check-circle" style="font-size:18px;color:red;" *ngIf="phone.touched && phone.pristine">Mobile Number is Required </i>
+              <i class="far fa-check-circle" style="font-size:18px;color:red;"*ngIf="phone.invalid && phone.dirty">Enter correct mobile </i>
+          </div>
+        </div>
+
+        <div formArrayName="hobbies"class="div1" >
+          <label style="font-size: 18px">Hobbies</label><br>
+          <div *ngFor="let hobbie of hobbies.controls; let i = index">
+            <input (change)="onChange(i)" type="checkbox" [formControlName]="i">
+            {{HobbiesArr[i].name}}
+          </div>
+          <div>
+            <small *ngIf="message" [class.text-danger]="message" style="font-size: 15px">Select at least 2 hobbies</small>
+          </div>
+        </div>
+
+        <div>
+          <br>
+            <label>State</label>
+            <select [class.is-invalid]="State.invalid && State.touched" formControlName="states" (change)="changeState($event.target.value)" class="form-control" style="display: inline">
+              <option value="" selected disabled hidden>Select State</option>
+              <option *ngFor ="let count of StateList">{{count.name}} </option>
+            </select>
+
+            <label>City  </label>
+              <select [class.is-invalid]="city.invalid && city.touched" formControlName="cityes" class="form-control">
+                  <option value="" selected disabled hidden>Select City</option>
+                  <option *ngFor ="let city of cities" style="margin-left: 100px">{{city}} </option>
+              </select>
+        </div>
+
+
+        <div>
+          <label>Pin Code</label>
+          <br>
+          <input  type="text" formControlName="pinCode" class="form-control" placeholder="Enter Your City Pin" mask="000-000">
+          <div >
+              <i class="far fa-check-circle" style="font-size:18px;color:red;" *ngIf="pin.touched && pin.pristine">Pinis Required </i>
+              <i class="far fa-check-circle" style="font-size:18px;color:red;"*ngIf="pin.invalid && pin.dirty">Enter correct pin</i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>
+<div class="sub-entry">
+  <div class ="main-content">
+    <div class="shape">
+        <h3 style="font-family:Georgia, 'Times New Roman', Times, serif">Technical Details</h3>
+        <hr size="30" color="white">
+
+        <div >
+            <label>Skills</label>
+            <tag-input formControlName='skills' ></tag-input>
+            <div *ngIf=' skills.invalid'>
+                <small  class="text-danger">Minimum 2 skill required</small>
+            </div>
+        </div>
+
+        <div>
+            <br>
+            <button (click)="OnSubmit()" class="btn btn-outline-success" type="button" [disabled]="!employee.valid" style="color:white" >Submit</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+</form>
+</div>
+<router-outlet></router-outlet>
+

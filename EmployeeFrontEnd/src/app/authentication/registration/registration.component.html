@@ -1,0 +1,32 @@
+<div class="container login-container">
+  <div class="row">
+<div class="col-md-6 login-form-2">
+  <div class="login-logo">
+      <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
+  </div>
+  <h3>SignUp Form</h3>
+  <form [formGroup]="registrationForm">
+      <div class="form-group">
+          <input formControlName="email" type="text" class="form-control" placeholder="Your Email *" value="" />
+      </div>
+      <div *ngIf="emailId.invalid && emailId.touched">
+        <i class="far fa-check-circle" style="font-size:18px;color:red;"> Enter correct email</i>
+      </div>
+      <div class="form-group">
+          <input formControlName="password"  type="password" class="form-control" placeholder="Your Password *" value="" />
+      </div>
+      <div *ngIf="password.invalid && password.touched">
+        <i class="far fa-check-circle" style="font-size:18px;color:red;"> Minimum eight character and one number</i>
+      </div>
+      <div class="form-group">
+          <input (click)="onSubmit()" type="submit" class="btnSubmit" value="Register" />
+      </div>
+      <div class="form-group">
+          <a href="#" class="btnForgetPwd" value="Register">Forget Password?</a>
+      </div>
+    </form>
+</div>
+</div>
+</div>
+
+

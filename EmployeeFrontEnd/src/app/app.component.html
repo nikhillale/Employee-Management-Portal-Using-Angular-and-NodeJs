@@ -1,0 +1,70 @@
+<!--The content below is only a placeholder and can be replaced.--><div class="bs-example">
+  <div style="text-align:center">
+    <h1 style="font-family:Georgia, 'Times New Roman', Times, serif">
+      Welcome To Employee Portal
+    </h1>
+  </div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="color:  #3b3333">
+    <button  routerLinkActive="router-link-active"   type="button" class="btn btn-outline-success" style="margin-right: 10px ; color:whitesmoke" (click)='checkedLogin()' >Login</button>
+    <button routerLink="/authentication/registration" routerLinkActive="router-link-active"   type="button" class="btn btn-outline-success" style="margin-right: 10px ; color:whitesmoke">Rgistration</button>
+    <button routerLink="/employee" routerLinkActive="router-link-active"   type="button" class="btn btn-outline-success" style="margin-right: 10px ; color:whitesmoke" >Employee</button>
+    <button type="button" class="btn btn-outline-primary " style="margin-right: 10px ; color:whitesmoke" (click)="openModal(template)">QuickAdd</button>
+    <button type="button" class="btn btn-outline-success" style="margin-right: 10px ; color:whitesmoke" (click)="logOut()">Logout</button>
+    </nav>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Employee Form</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="employee" (ngSubmit)="OnSubmit()">
+      <div class="form-group">
+        <label > Name</label>
+        <input class="form-control" type="text" formControlName="firstName" name ="" placeholder="Enter Your Last Name">
+        <div *ngIf="name.invalid && name.touched">
+          <small *ngIf="name.hasError('required')" class="text-danger"> Name is Required</small>
+          <small *ngIf="name.hasError('minlength')" class="text-danger">Minimum 3 character accepted</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label >Email</label>
+        <input [class.is-invalid]="email.invalid && email.touched" formControlName="email" class="form-control" type="email" name="" placeholder="Enter Your Email">
+          <div *ngIf="email.invalid && email.touched">
+            <small *ngIf="email.hasError('required')" class="text-danger">Email is Required</small>
+            <small *ngIf="email.hasError('pattern')" class="text-danger">Enter correct </small>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label >Addreess</label>
+        <input [class.is-invalid]="address.invalid && address.touched" class="form-control" type="text" formControlName='address' placeholder="Enter Your Last Name">
+        <div *ngIf="address.invalid && address.touched">
+          <small *ngIf="address.hasError('required')" class="text-danger">Address is Required</small>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label >Contact Number</label>
+        <input class="form-control" type="text" formControlName="contactNumber" placeholder="Enter Your Last Name">
+        <div *ngIf="contact.invalid && contact.touched">
+          <small *ngIf="contact.hasError('required')" class="text-danger">Mobile Number is Required</small>
+          <small *ngIf="contact.hasError('pattern')" class="text-danger">Enter correct Mobile Number</small>
+        </div>
+      </div>
+
+      <div>
+        <br>
+        <button (click)="OnSubmit()" class="btn btn-primary" type="button" [disabled]="!employee.valid" style="color:white" >Submit</button>
+    </div>
+    </form>
+
+  </div>
+</ng-template>
+<router-outlet></router-outlet>
+

@@ -1,0 +1,176 @@
+<br>
+<div>
+  <div class="bs-example">
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="color:  #3b3333">
+          <button (click)='toList()' type="button" class="btn btn-outline-success" style="margin-right: 10px ; color:whitesmoke" >List</button>
+          <button (click)='toAdd()' type="button" class="btn btn-outline-primary " style="color:whitesmoke">Add</button>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      </nav>
+  </div>
+</div>
+<div class=" text-white">
+<form [formGroup]="updateEmp">
+<div class="sub-entry">
+<div class = "shape">
+  <div class="form-group">
+      <h3 style="font-family:Georgia, 'Times New Roman', Times, serif">Technical Details</h3>
+      <hr size="30" color="white">
+      <label >First Name</label>
+      <input [class.is-invalid]="firstName.invalid && firstName.touched" formControlName="firstName" class="form-control" type="text" name="">
+      <div *ngIf="firstName.invalid && firstName.touched">
+          <small *ngIf="firstName.hasError('required')" class="text-danger">Name is Required</small>
+          <small *ngIf="firstName.hasError('minlength')" class="text-danger">Minimum 3 character accepted</small>
+        </div>
+    </div>
+
+<div class="form-group">
+    <label >Last Name</label>
+    <input [class.is-invalid]="lastName.invalid && lastName.touched" formControlName="lastName" class="form-control" type="text" name="">
+    <div *ngIf="lastName.invalid && lastName.touched">
+        <small *ngIf="lastName.hasError('required')" class="text-danger">Last Name is Required</small>
+        <small *ngIf="lastName.hasError('minlength')" class="text-danger">Minimum 3 character accepted</small>
+    </div>
+</div>
+
+<div class="form-group">
+    <label >Email</label>
+    <input [class.is-invalid]="email.invalid && email.touched" formControlName="email" class="form-control" type="email" name="" placeholder="Enter Your Email">
+    <div *ngIf="email.invalid && email.touched">
+      <small *ngIf="email.hasError('required')" class="text-danger">Email is Required</small>
+      <small *ngIf="email.hasError('pattern')" class="text-danger">Enter correct </small>
+    </div>
+</div>
+
+<div>
+    <label>Gender</label>
+    <br>
+    <label>
+      <input type="radio" value="Male" formControlName="gender" Selected>
+        <span>Male</span>
+    </label>
+    <label>
+      <input type="radio" value="Female" formControlName="gender">
+        <span>Female</span>
+    </label>
+  </div>
+  <div class="form-group">
+      <label >Age</label>
+      <input [class.is-invalid]="age.invalid && age.touched"  formControlName="age" class="form-control" type="number" name="" placeholder="Enter Your Age">
+      <div *ngIf="age.invalid && age.touched">
+        <small *ngIf="age.hasError('required')" class="text-danger">Age is Required</small>
+        <small *ngIf="age.hasError('pattern')" class="text-danger">Enter correct Age</small>
+      </div>
+  </div>
+
+  <div class="form-group">
+      <label >Salary</label>
+      <input [class.is-invalid]="salary.invalid && salary.touched" formControlName="salary" class="form-control" type="number" name="" placeholder="Enter Your Salary">
+      <div *ngIf="salary.invalid && salary.touched">
+        <small *ngIf="salary.hasError('required')" class="text-danger">Salary is Required</small>
+      </div>
+  </div>
+  <div class="form-group">
+      <label >Date Of Birth</label>
+      <input class="form-control" type="text" formControlName="Dob" bsDatepicker
+      [bsConfig]="{ adaptivePosition: true }" placeholder="select Date of Birth">
+    </div>
+  <div class="custom-file">
+    <input  class="custom-file-input" type="file" (change)="onFileUpload($event)">
+    <label  class="custom-file-label">Upload Profile Picture</label>
+  </div>
+
+  <div>
+    <img [src]="url" width="70px" height="35px">
+  </div>
+
+</div>
+</div>
+<div class="sub-entry">
+<div class ="main-content">
+<div class ="shape">
+    <div class="form-group">
+        <h3 style="font-family:Georgia, 'Times New Roman', Times, serif">Technical Details</h3>
+        <hr size="30" color="white">
+        <label >Address</label>
+        <input [class.is-invalid]="address.invalid && address.touched"  class="form-control" type="text" formControlName="address" placeholder="Enter Your Address">
+        <div *ngIf="address.invalid && address.touched">
+          <small *ngIf="salary.hasError('required')" class="text-danger">Address is Required</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <label >Contact Number </label>
+          <input [class.is-invalid]="phone.invalid && phone.touched" class="form-control" type="text" formControlName="contactNumber" placeholder="Enter Your Contact Number">
+          <div *ngIf="phone.invalid && phone.touched">
+            <small *ngIf="phone.hasError('required')" class="text-danger">Mobile Number is Required</small>
+            <small *ngIf="phone.hasError('pattern')" class="text-danger">Enter correct Mobile Number</small>
+          </div>
+        </div>
+
+        <div formArrayName="hobbies"class="div1" >
+            <label style="font-size: 18px">Hobbies</label><br>
+            <label *ngFor="let hobbie of hobbies.controls; let i = index">
+              <input (change)="onChange(i)" type="checkbox" [formControlName]="i">
+              {{HobbiesArr[i].name}}
+            </label>
+            <div>
+              <small *ngIf="message" [class.text-danger]="message" style="font-size: 15px">Select at least 2 hobbies</small>
+            </div>
+        </div>
+        <div>
+            <br>
+              <label>State</label>
+              <select [class.is-invalid]="State.invalid && State.touched" formControlName="states" (change)="changeState($event.target.value)" class="form-control" style="display: inline">
+                <option value="" selected disabled hidden>Select State</option>
+                <option *ngFor ="let count of StateList">{{count.name}} </option>
+              </select>
+
+              <label>City  </label>
+                <select [class.is-invalid]="city.invalid && city.touched" formControlName="cityes" class="form-control">
+                    <option value="" selected disabled hidden>Select City</option>
+                    <option *ngFor ="let city of cities" style="margin-left: 100px">{{city}} </option>
+                </select>
+          </div>
+
+          <div>
+            <label>Pin Code</label>
+            <br>
+            <input [class.is-invalid]="pin.invalid && pin.touched" type="text" formControlName="pinCode" class="form-control" placeholder="Enter Your City Pin">
+            <div *ngIf="pin.invalid && pin.touched">
+              <small *ngIf="pin.hasError('required')" class="text-danger">Pin is Required</small>
+              <small *ngIf="phone.hasError('pattern')" class="text-danger">Enter correct Pin code</small>
+            </div>
+          </div>
+
+  </div>
+</div>
+</div>
+<div class="sub-entry">
+    <div class ="main-content">
+      <div class="shape">
+          <h3 style="font-family:Georgia, 'Times New Roman', Times, serif">Technical Details</h3>
+          <hr size="30" color="white">
+
+          <div >
+              <label>Skills</label>
+              <tag-input [class.is-invalid]="skills.invalid && skills.touched" formControlName='skills' ></tag-input>
+              <div *ngIf="skills.invalid && skills.touched">
+                  <small *ngIf="skills.hasError('required')" class="text-danger">Skills is Required</small>
+                  <small *ngIf="skills.hasError('minlength')" class="text-danger">Minimum 2 skillsaccepted</small>
+              </div>
+          </div>
+
+          <div>
+              <br>
+              <button (click)="OnSubmit()" (click)="toList()" class="btn btn-primary" type="button" [disabled]="!updateEmp.valid">Update</button>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</form>
+</div>
+<router-outlet></router-outlet>
+
