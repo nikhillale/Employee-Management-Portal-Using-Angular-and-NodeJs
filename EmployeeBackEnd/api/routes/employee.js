@@ -22,28 +22,6 @@ const storage = multer.diskStorage({
 })
 const upload = multer({storage:storage});
 
-// ------------------------Token------------------------------------
-// function varifyToken(req, res, next){
-//     if(!req.headers.authorization){
-//         return res.status(401).json({message : 'unauthorized '})
-//     }
-//     console.log(req.headers.authorization);
-    
-//     let token = req.headers.authorization.split(' ')[1]
-//      console.log(token);
-    
-//     if(token == 'null'){
-//         return res.status(401).json({message : 'unauthorized'})
-//     }
-//     let payload = jwt.verify(token, 'nikhil');
-//     if(!payload){
-//         res.status(401).json({message : 'unauthorized user'})
-//     }
-//     req.email= payload.subject;
-//     next()
-// }
-
-
 // -------------------------Mail---------------------------------
 router.post('/reset',(req, res, next)=>{
     const mail= req.body.email
@@ -62,8 +40,8 @@ router.post('/reset',(req, res, next)=>{
         const transporter = nodemailer.createTransport({
             service : 'gmail',
             auth: {
-                user: 'nikhillale93@gmail.com',
-                pass: 'gmhpac120tx@'
+                user: 'Your Email',
+                pass: 'your Password'
             }
             
         });
